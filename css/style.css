@@ -194,6 +194,25 @@ footer ul a:hover { color: var(--gold); }
 .trust-item { text-align: center; font-size: 0.8rem; color: var(--gray-400); }
 .trust-item strong { display: block; color: var(--text); font-size: 0.9rem; }
 
+/* ===== Process/Trading Flow ===== */
+.process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+.process-card {
+  background: var(--white); border-radius: var(--radius); padding: 32px 28px;
+  text-align: center; box-shadow: var(--shadow); border: 1px solid var(--gray-100);
+  position: relative; transition: all 0.3s;
+}
+.process-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.process-step {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  color: var(--navy); font-size: 1.25rem; font-weight: 900;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 16px; line-height: 1;
+}
+.process-card h3 { font-size: 1.05rem; margin-bottom: 10px; }
+.process-card p { font-size: 0.9rem; color: var(--gray-600); margin-bottom: 0; }
+.process-card strong { color: var(--gold-dark); }
+
 /* ===== GEO Entity Box ===== */
 .geo-box { background: linear-gradient(135deg, #f8f6f1, #f0ede6); border: 1px solid #e8e3d8; border-radius: var(--radius); padding: 32px; margin: 32px 0; }
 .geo-box h3 { color: var(--navy); }
