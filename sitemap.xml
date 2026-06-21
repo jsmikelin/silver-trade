@@ -13,19 +13,23 @@
   <url><loc>https://www.helinsilver.com/blog/</loc><lastmod>2026-06-21</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url>
   <url><loc>https://www.helinsilver.com/jp/blog/</loc><lastmod>2026-06-21</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url>
   <!-- Blog article pages (EN) -->
-  <url><loc>https://www.helinsilver.com/blog/silver-price-outlook-2026</loc><lastmod>2026-06-21</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.helinsilver.com/blog/hong-kong-silver-export-guide</loc><lastmod>2026-06-21</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.helinsilver.com/blog/silver-price-outlook-2026.html</loc><lastmod>2026-06-21</lastmod><changefreq>monthly</changefreq><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.helinsilver.com/blog/silver-price-outlook-2026.html"/><xhtml:link rel="alternate" hreflang="ja" href="https://www.helinsilver.com/jp/blog/silver-price-outlook-2026.html"/></url>
+  <url><loc>https://www.helinsilver.com/blog/hong-kong-silver-export-guide.html</loc><lastmod>2026-06-15</lastmod><changefreq>monthly</changefreq><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.helinsilver.com/blog/hong-kong-silver-export-guide.html"/><xhtml:link rel="alternate" hreflang="ja" href="https://www.helinsilver.com/jp/blog/hong-kong-silver-export-guide.html"/></url>
+  <url><loc>https://www.helinsilver.com/blog/us-silver-import-guide.html</loc><lastmod>2026-06-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.helinsilver.com/blog/us-silver-import-guide.html"/><xhtml:link rel="alternate" hreflang="ja" href="https://www.helinsilver.com/jp/blog/us-silver-import-guide.html"/></url>
+  <!-- Legacy article entries (placeholder slugs, no .html yet) -->
   <url><loc>https://www.helinsilver.com/blog/silver-market-q3-2026</loc><lastmod>2026-06-21</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.helinsilver.com/blog/us-silver-import-guide</loc><lastmod>2026-06-21</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://www.helinsilver.com/blog/japan-silver-market-opportunities</loc><lastmod>2026-06-21</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://www.helinsilver.com/blog/lbma-standards-guide</loc><lastmod>2026-06-21</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://www.helinsilver.com/blog/silver-shipping-air-vs-sea</loc><lastmod>2026-06-21</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://www.helinsilver.com/blog/lme-silver-pricing</loc><lastmod>2026-06-21</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <!-- Blog article pages (JP) -->
-  <url><loc>https://www.helinsilver.com/jp/blog/silver-price-outlook-2026</loc><lastmod>2026-06-21</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://www.helinsilver.com/jp/blog/hong-kong-silver-export-guide</loc><lastmod>2026-06-21</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://www.helinsilver.com/jp/blog/silver-price-outlook-2026.html</loc><lastmod>2026-06-21</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://www.helinsilver.com/jp/blog/hong-kong-silver-export-guide.html</loc><lastmod>2026-06-21</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://www.helinsilver.com/jp/blog/us-silver-import-guide.html</loc><lastmod>2026-06-21</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://www.helinsilver.com/jp/blog/silver-market-q3-2026</loc><lastmod>2026-06-21</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://www.helinsilver.com/jp/blog/us-silver-import-guide</loc><lastmod>2026-06-21</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://www.helinsilver.com/jp/blog/japan-silver-market-opportunities</loc><lastmod>2026-06-21</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://www.helinsilver.com/jp/blog/lbma-standards-guide</loc><lastmod>2026-06-21</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://www.helinsilver.com/jp/blog/silver-shipping-air-vs-sea</loc><lastmod>2026-06-21</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
