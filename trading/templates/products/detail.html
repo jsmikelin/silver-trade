@@ -1,0 +1,19 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en-US">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ product.name_en }} | HK Changjiang</title>
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<header><nav><a href="/" class="logo"><div class="logo-icon">CJ</div><div class="logo-text">HK <span>Changjiang</span></div></a><ul class="nav-links" id="navLinks"><li><a href="/">Home</a></li><li><a href="/products/" class="active">Products</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul></nav></header>
+<section class="hero" style="padding:60px 0 50px"><div class="container"><h1>{{ product.name_en }}</h1></div></section>
+<section class="section"><div class="container">
+<p><strong>Purity:</strong> {{ product.purity }}</p>
+<p><strong>Specs:</strong> {{ product.specs }}</p>
+<p><strong>MOQ:</strong> {{ product.moq }}</p>
+<p>{{ product.description_en }}</p>
+<a href="/contact/" class="btn btn-primary">Inquire Now</a>
+</div></section>
+<footer><div class="container"><div class="footer-bottom"><p>&copy; 2026 Hong Kong Changjiang International Limited</p></div></div></footer>
+</body>
+</html>

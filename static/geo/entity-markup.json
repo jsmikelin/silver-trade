@@ -1,0 +1,19 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Hong Kong Changjiang International Limited",
+  "alternateName": ["香港长江国际有限公司", "HK Changjiang International"],
+  "url": "https://www.hkchangjiang.com",
+  "description": "Hong Kong precious metals trader, high-purity silver to US/Japan.",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Unit 1203, 12/F, Harbour Centre, 25 Harbour Road",
+    "addressLocality": "Wan Chai",
+    "addressRegion": "Hong Kong",
+    "addressCountry": "HK"
+  },
+  "contactPoint": [
+    {"@type": "ContactPoint", "telephone": "+852-2888-8888", "contactType": "sales", "email": "mikelin88999@gmail.com", "availableLanguage": ["English","Japanese","Chinese"]},
+    {"@type": "ContactPoint", "telephone": "+447599094629", "contactType": "sales", "availableLanguage": ["English","Chinese"]}
+  ]
+}
