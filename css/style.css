@@ -347,6 +347,24 @@ footer ul a:hover { color: var(--gold-light); }
 .trust-item { text-align: center; font-size: 0.78rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.08em; }
 .trust-item strong { display: block; color: var(--text); font-size: 0.88rem; margin-bottom: 4px; letter-spacing: 0.04em; }
 
+/* ===== Visitor Counter ===== */
+.visitor-counter {
+  background: var(--navy-dark);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 0.04em;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+.vc-icon { font-size: 1rem; margin-right: 6px; }
+.vc-num {
+  color: var(--gold-light);
+  font-weight: 700;
+  font-size: 1rem;
+}
+.vc-label { color: rgba(255,255,255,0.25); margin-left: 4px; }
+
 /* ===== GEO Box ===== */
 .geo-box {
   background: linear-gradient(135deg, var(--cream), var(--off-white));
