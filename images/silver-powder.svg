@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#1a1a2e" rx="8"/>
+  <rect x="100" y="80" width="200" height="140" rx="6" fill="#b0b0b0" opacity="0.9"/>
+  <text x="200" y="160" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#1a1a2e">Ag Powder</text>
+  <text x="200" y="200" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#333">HONG KONG</text>
+  <rect x="120" y="90" width="30" height="8" rx="2" fill="#b0b0b0" opacity="0.7"/>
+  <rect x="250" y="90" width="30" height="8" rx="2" fill="#b0b0b0" opacity="0.7"/>
+</svg>
