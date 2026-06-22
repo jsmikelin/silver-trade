@@ -21,7 +21,7 @@
 
   // --- Configuration ------------------------------------------------
   // >>> SET YOUR FREE gold-api.com API KEY HERE <<<
-  var API_KEY = '';  // paste your key from https://www.gold-api.com/
+  var API_KEY = '2d2a7f41679a24a89ccc7206fe95497ac1fa117b33206ee765358588673a088c';
 
   var GOLD_API_URL = 'https://www.gold-api.com/price/XAG';
 
