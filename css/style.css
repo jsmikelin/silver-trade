@@ -147,8 +147,106 @@ nav {
 .hero h1 span { background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .hero p {
   font-size: 1.15rem; color: rgba(255,255,255,0.6);
-  max-width: 640px; margin-bottom: 2.5rem; line-height: 1.9;
+  max-width: 640px; margin-bottom: 2rem; line-height: 1.9;
 }
+
+/* ===== Hero Pricing Widget ===== */
+.hero-pricing {
+  display: flex;
+  gap: 28px;
+  align-items: stretch;
+  margin-bottom: 2rem;
+  padding: 20px 28px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(180,148,44,0.15);
+  border-radius: 14px;
+  max-width: 740px;
+  flex-wrap: wrap;
+}
+.hero-pricing-comex {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 180px;
+}
+.hero-pricing-our {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  min-width: 240px;
+}
+.hero-pricing-label {
+  font-size: 0.70rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.4);
+  font-weight: 500;
+}
+.hero-pricing-price {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--gold-light);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
+}
+.hero-pricing-change {
+  font-size: 0.85rem;
+  min-height: 1.2em;
+}
+.hero-pricing-divider {
+  width: 1px;
+  background: rgba(255,255,255,0.08);
+  align-self: stretch;
+}
+.hero-pricing-products {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.hero-pricing-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 0.88rem;
+}
+.hero-pricing-row .prod-name {
+  color: rgba(255,255,255,0.55);
+  min-width: 90px;
+  font-size: 0.82rem;
+}
+.hero-pricing-row .prod-price {
+  color: var(--gold-light);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.hero-pricing-row .prod-premium {
+  color: rgba(255,255,255,0.3);
+  font-size: 0.72rem;
+}
+.hero-pricing-spread {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.35);
+  margin-top: 2px;
+}
+
+/* Mobile: stack columns */
+@media (max-width: 640px) {
+  .hero-pricing {
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px 20px;
+  }
+  .hero-pricing-divider {
+    width: 100%;
+    height: 1px;
+    align-self: auto;
+  }
+  .hero-pricing-price {
+    font-size: 1.3rem;
+  }
+}
+
 .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
 
 .btn {
