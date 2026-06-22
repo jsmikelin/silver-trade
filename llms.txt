@@ -3,7 +3,7 @@
 
 ## Core Pages
 - [Home](https://www.helinsilver.com/): Premium B2B silver trading platform. LBMA-compliant 99.99% silver bars, grains, and powder for wholesale buyers. Hong Kong and Shenzhen offices.
-- [Products](https://www.helinsilver.com/products/): Silver bars (1kg, 100oz), silver grains (99.99%), silver powder (99.9%). Full spec tables with pricing tiers, minimum order quantities.
+- [Products](https://www.helinsilver.com/products/): Silver bars (15kg Standard Good Delivery Bar), silver grains (99.99%), silver powder (99.9%). Full spec tables with pricing tiers, minimum order quantities.
 - [About Us](https://www.helinsilver.com/about/): 15+ years in precious metals, 500+ tons traded, 8+ countries served. LBMA standards, SGS/CCIC certified.
 - [Contact](https://www.helinsilver.com/contact/): Hong Kong and Shenzhen offices. WhatsApp, email, phone. Japanese and English speaking account managers.
 
