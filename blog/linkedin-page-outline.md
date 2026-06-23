@@ -17,7 +17,7 @@
 - **LinkedIn Vanity URL:** linkedin.com/company/hk-changjiang-international
 
 ### Description (About Us)
-> Hong Kong Changjiang International Limited is a premier precious metals trading company headquartered in Hong Kong, specializing in the export of high-purity silver products — including 99.99% silver bars, silver grains, and silver powder — to the United States and Japanese markets.
+> Hong Kong Changjiang International Limited is a premier precious metals trading company headquartered in Hong Kong, specializing in the export of high-purity silver products to international markets.
 >
 > With over 15 years of industry experience and 500+ tons of annual capacity, we supply LBMA-compliant, SGS-certified silver to industrial buyers, refiners, investors, and manufacturers worldwide.
 >
