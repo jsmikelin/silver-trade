@@ -3,16 +3,16 @@
   "@type": "Organization",
   "name": "Hong Kong Changjiang International Limited",
   "alternateName": [
-    "\u9999\u6e2f\u957f\u6c5f\u56fd\u9645\u6709\u9650\u516c\u53f8",
+    "香港长江国际有限公司",
     "HK Changjiang International"
   ],
   "url": "https://www.hkchangjiang.com",
   "description": "Hong Kong precious metals trader, high-purity silver worldwide.",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "Unit 1203, 12/F, Harbour Centre, 25 Harbour Road",
-    "addressLocality": "Wan Chai",
-    "addressRegion": "Hong Kong",
+    "streetAddress": "Unit 1618B, 16/F Pioneer Centre, 750 Nathan Road",
+    "addressLocality": "Mong Kok",
+    "addressRegion": "Kowloon",
     "addressCountry": "HK"
   },
   "contactPoint": [

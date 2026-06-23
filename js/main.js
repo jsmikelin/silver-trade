@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded",function(){
   var form=document.getElementById("contactForm");
   if(form){form.addEventListener("submit",function(e){
     e.preventDefault();var btn=e.target.querySelector("button");btn.textContent="Sending...";btn.disabled=true;
-    setTimeout(function(){alert("Thank you! Your inquiry has been received.\n\nContact us directly:\nEmail: mikelin88999@gmail.com\nWhatsApp: +447****4629");btn.textContent="Send Inquiry";btn.disabled=false;e.target.reset();},1000);
+    setTimeout(function(){alert("Thank you! Your inquiry has been received.\n\nContact us directly:\nEmail: mikelin88999@gmail.com\nWhatsApp: +447599094629");btn.textContent="Send Inquiry";btn.disabled=false;e.target.reset();},1000);
   });}
 });
 

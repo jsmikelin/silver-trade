@@ -19,9 +19,9 @@
 ### Description (About Us)
 > Hong Kong Changjiang International Limited is a premier precious metals trading company headquartered in Hong Kong, specializing in the export of high-purity silver products to international markets.
 >
-> With over 15 years of industry experience and 500+ tons of annual capacity, we supply LBMA-compliant, SGS-certified silver to industrial buyers, refiners, investors, and manufacturers worldwide.
+> With over 15 years of industry experience and 500+ tons of annual capacity, we supply LBMA-compliant, CCIC-certified silver to industrial buyers, refiners, investors, and manufacturers worldwide.
 >
-> Our expertise spans the full trading lifecycle: sourcing, quality assurance (SGS/CCIC third-party testing), logistics (air/sea freight), customs documentation, and competitive LME-indexed pricing.
+> Our expertise spans the full trading lifecycle: sourcing, quality assurance (CCIC third-party testing), logistics (air/sea freight), customs documentation, and competitive LME-indexed pricing.
 >
 > We serve clients in the solar photovoltaic, electronics, automotive, jewelry, and investment sectors who demand the highest purity standards and reliable supply chains.
 
@@ -65,7 +65,7 @@
 ### Week 3 — Industry
 - **Mon:** Solar industry demand growth for silver — what it means for buyers
 - **Wed:** Why Hong Kong is the premier hub for silver trading (free port, banking, logistics)
-- **Fri:** Video or image carousel: Quality control process (SGS testing)
+- **Fri:** Video or image carousel: Quality control process (CCIC testing)
 
 ### Week 4 — Thought Leadership
 - **Mon:** LME silver pricing mechanism explained for procurement managers
