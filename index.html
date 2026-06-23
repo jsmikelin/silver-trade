@@ -73,6 +73,65 @@ gtag('config', 'G-QQ5SDMPS8K');
 
 <script src="/js/comex-pricing.js"></script>
 
+<!-- ===== Client Registration / Inquiry Form ===== -->
+<section class="section section-alt" id="registration">
+  <div class="container">
+    <div class="section-title">
+      <div class="section-tag">Register Now</div>
+      <h2>Submit Your Inquiry</h2>
+      <div class="gold-accent"></div>
+      <p>Fill in your details and we'll get back to you within 2 hours with a custom quote</p>
+    </div>
+    <div class="form-wrapper" id="registerFormWrapper">
+      <form class="register-form" id="registerForm" onsubmit="return handleRegisterForm(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="regCountry">Country <span class="required">*</span></label>
+            <select id="regCountry" name="country" required>
+              <option value="">Select your country...</option>
+              <option value="USA">🇺🇸 USA</option>
+              <option value="Japan">🇯🇵 Japan</option>
+              <option value="UK">🇬🇧 UK</option>
+              <option value="Germany">🇩🇪 Germany</option>
+              <option value="Singapore">🇸🇬 Singapore</option>
+              <option value="Other">🌍 Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="regName">Full Name <span class="required">*</span></label>
+            <input type="text" id="regName" name="name" placeholder="Your full name" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="regEmail">Email Address <span class="required">*</span></label>
+            <input type="email" id="regEmail" name="email" placeholder="your@email.com" required>
+          </div>
+          <div class="form-group">
+            <label for="regWhatsApp">WhatsApp Number <span class="required">*</span></label>
+            <input type="tel" id="regWhatsApp" name="whatsapp" placeholder="+1 234 567 8900 (include country code)" required>
+            <small class="form-hint">Include country code, e.g. +1 for USA, +81 for Japan</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="regMessage">Inquiry Details <span class="required">*</span></label>
+          <textarea id="regMessage" name="message" placeholder="Please describe: desired product (bars/grains/powder), quantity (kg), target price (USD/oz), and any special requirements..." required></textarea>
+        </div>
+        <div class="form-submit-row">
+          <button type="submit" class="btn btn-primary" id="registerSubmitBtn">→ Submit Inquiry</button>
+        </div>
+      </form>
+      <div class="register-success" id="registerSuccess" style="display:none;">
+        <div class="success-icon">✓</div>
+        <h3>Thank You!</h3>
+        <p>Your inquiry has been received. Our team will contact you via WhatsApp or email within <strong>2 hours</strong>.</p>
+        <p class="success-email">📧 mikelin88999@gmail.com &nbsp;|&nbsp; 💬 WhatsApp: +447****4629</p>
+        <button class="btn btn-outline" onclick="resetRegisterForm()" style="margin-top:20px;color:var(--navy);border-color:var(--gold);">Submit Another Inquiry</button>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="section section-alt"><div class="container"><div class="section-title"><div class="section-tag">Our Products</div><h2>Premium Silver Products</h2><div class="gold-accent"></div><p>High-purity silver for industrial, investment, and manufacturing applications</p></div><div class="products-grid"><div class="product-card"><img src="/images/silver-bar.jpg" alt="Silver Bars 99.99%" style="width:100%;max-width:220px;height:auto;object-fit:cover;margin-bottom:20px;display:block;border-radius:10px;"><h3>Silver Bars</h3><p class="spec">15kg (约 482oz) — Standard Good Delivery Bar</p><p>LBMA Good Delivery standard 15kg bars. Fully traceable with assay certificates.</p><span class="purity">99.99% 4N</span></div><div class="product-card"><img src="/images/silver-grains.jpg" alt="Silver Grains 99.99%" style="width:100%;max-width:220px;height:auto;object-fit:cover;margin-bottom:20px;display:block;border-radius:10px;"><h3>Silver Grains</h3><p class="spec">1-3mm / 3-5mm</p><p>High-purity granules for manufacturing, jewelry, and industrial applications.</p><span class="purity">99.99% 4N</span></div><div class="product-card"><img src="/images/silver-powder.jpg" alt="Silver Powder 99.9%" style="width:100%;max-width:220px;height:auto;object-fit:cover;margin-bottom:20px;display:block;border-radius:10px;"><h3>Silver Powder</h3><p class="spec">200-600 / 600-1200 mesh</p><p>Fine powder for conductive pastes, electronics, and catalysts.</p><span class="purity">99.9%</span></div></div><div style="text-align:center;margin-top:40px"><a href="/products/" class="btn btn-primary">View Full Catalog</a></div></div></section>
 
 <section class="section"><div class="container"><div class="section-title"><div class="section-tag">Why Choose Us</div><h2>Why HK Changjiang</h2><div class="gold-accent"></div></div><div class="features-grid"><div class="feature-card"><span class="feature-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span><h3>Hong Kong Based</h3><p>Strategic location with world-class logistics. Direct access to global shipping routes.</p></div><div class="feature-card"><span class="feature-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg></span><h3>SGS Certified</h3><p>Third-party tested. Full assay certificates with every shipment.</p></div><div class="feature-card"><span class="feature-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span><h3>International Expertise</h3><p>English and Japanese speaking managers. Full logistics &amp; customs support.</p></div><div class="feature-card"><span class="feature-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><polyline points="17 5 12 1 7 5"/><polyline points="17 19 12 23 7 19"/></svg></span><h3>Competitive Pricing</h3><p>LME-indexed pricing. Volume discounts. Flexible payment terms.</p></div><div class="feature-card"><span class="feature-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></span><h3>Full Compliance</h3><p>LBMA standards. Global import regulation compliant.</p></div><div class="feature-card"><span class="feature-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span><h3>Fast Response</h3><p>Inquiry response within 2 hours. WhatsApp: <a href="https://wa.me/447599094629" target="_blank">+447****4629</a></p></div></div></div></section>

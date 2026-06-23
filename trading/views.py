@@ -1,8 +1,76 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from django.contrib import messages
+from django.views.decorators.csrf import csrf_exempt
 from .models import Product, Blog, Inquiry, Customer
+import json, sqlite3, os, logging
+
+logger = logging.getLogger(__name__)
+
+@csrf_exempt
+def api_form_submission(request):
+    """JSON API endpoint for registration form submissions.
+    Also writes to feishu-backup SQLite for dual-write."""
+    if request.method != "POST":
+        return JsonResponse({"error": "POST only"}, status=405)
+    try:
+        data = json.loads(request.body)
+    except json.JSONDecodeError:
+        return JsonResponse({"error": "Invalid JSON"}, status=400)
+
+    country  = data.get("country", "")
+    name     = data.get("name", "")
+    email    = data.get("email", "")
+    whatsapp = data.get("whatsapp", "")
+    message  = data.get("message", "")
+
+    if not email or not name:
+        return JsonResponse({"error": "name and email required"}, status=400)
+
+    # 1) Save to Django models (Customer + Inquiry)
+    try:
+        customer, _ = Customer.objects.get_or_create(
+            email=email,
+            defaults={
+                "company_name": name,
+                "contact_person": name,
+                "phone": whatsapp,
+                "country": country,
+                "source": "web-registration",
+            },
+        )
+        Inquiry.objects.create(
+            customer=customer,
+            message=message,
+            quantity="",
+            target_price="",
+        )
+    except Exception as e:
+        logger.error("Django save error: %s", e)
+
+    # 2) Dual-write to feishu-backup SQLite
+    try:
+        db_path = os.path.expanduser("~/.hermes/data/trade.db")
+        conn = sqlite3.connect(db_path)
+        conn.execute(
+            """INSERT INTO trade_records
+               (customer_name, customer_contact, product_type, quantity_kg, notes, source)
+               VALUES (?, ?, 'inquiry', 0, ?, 'web')""",
+            (name, f"{email} / {whatsapp} / {country}", message[:500]),
+        )
+        # Also add customer record
+        conn.execute(
+            """INSERT OR IGNORE INTO customers (name, email, whatsapp, country, source)
+               VALUES (?, ?, ?, ?, 'web')""",
+            (name, email, whatsapp, country),
+        )
+        conn.commit()
+        conn.close()
+    except Exception as e:
+        logger.error("SQLite dual-write error: %s", e)
+
+    return JsonResponse({"status": "ok", "message": "Inquiry received"})
 
 def home(request):
     products = Product.objects.filter(is_active=True)[:6]

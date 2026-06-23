@@ -14,4 +14,5 @@ urlpatterns = [
     path("jp/about/", views.jp_about, name="jp_about"),
     path("jp/contact/", views.jp_contact, name="jp_contact"),
     path("jp/blog/", views.jp_blog, name="jp_blog"),
+    path("api/form-submissions/", views.api_form_submission, name="api_form_submission"),
 ]
