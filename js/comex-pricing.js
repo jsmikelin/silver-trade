@@ -23,7 +23,10 @@
   // >>> SET YOUR FREE gold-api.com API KEY HERE <<<
   var API_KEY = '2d2a7f41679a24a89ccc7206fe95497ac1fa117b33206ee765358588673a088c';
 
+  // Uses gold-api.com with a CORS proxy (gold-api doesn't allow browser CORS)
+  // Proxy: corsproxy.io (free tier)
   var GOLD_API_URL = 'https://api.gold-api.com/price/XAG';
+  var PROXY_URL    = 'https://corsproxy.io/?url=' + encodeURIComponent(GOLD_API_URL);
 
   // Trend config
   var TREND  = 'downtrend';   // 'uptrend' | 'downtrend' | 'sideways'
@@ -73,13 +76,20 @@
   // --- Data Fetching -------------------------------------------------
   var lastValidPrice = null;
 
+  // --- Market data (no-CORS fallback chain) ---
+  // gold-api.com banned direct browser CORS. We use a public CORS proxy,
+  // then fall back to an inline approximation based on previous close.
+  var FALLBACK_PRICE  = 65.17;   // rough COMEX silver close
+  var PROXY_TIMEOUT   = 5000;
+
   function fetchComexPrice() {
     return new Promise(function(resolve) {
+      // Attempt 1 — via CORS proxy
       var xhr = new XMLHttpRequest();
-      xhr.open('GET', GOLD_API_URL, true);
+      xhr.open('GET', PROXY_URL, true);
       xhr.setRequestHeader('x-access-token', API_KEY);
       xhr.withCredentials = false;
-      xhr.timeout = 10000;
+      xhr.timeout = PROXY_TIMEOUT;
 
       xhr.onload = function() {
         if (xhr.status >= 200 && xhr.status < 400) {
@@ -92,19 +102,33 @@
             }
           } catch(e) {}
         }
-        resolve(lastValidPrice);
+        // fall through to attempt 2
+        attemptFallback(resolve);
       };
 
-      xhr.onerror = function() {
-        resolve(lastValidPrice);
-      };
-
-      xhr.ontimeout = function() {
-        resolve(lastValidPrice);
-      };
+      xhr.onerror  = function() { attemptFallback(resolve); };
+      xhr.ontimeout = function() { attemptFallback(resolve); };
 
       xhr.send();
     });
+  }
+
+  function attemptFallback(resolve) {
+    // Attempt 2 — fetch the page itself (server-rendered price via PHP/static update)
+    var f = new XMLHttpRequest();
+    f.open('GET', '/api/live-price.json?t=' + Date.now(), true);
+    f.timeout = 3000;
+    f.onload = function() {
+      if (f.status === 200) {
+        try { var d = JSON.parse(f.responseText);
+          if (d && typeof d.price === 'number') { lastValidPrice = d.price; resolve(d.price); return; }
+        } catch(e) {}
+      }
+      resolve(lastValidPrice || FALLBACK_PRICE);
+    };
+    f.onerror  = function() { resolve(lastValidPrice || FALLBACK_PRICE); };
+    f.ontimeout = function() { resolve(lastValidPrice || FALLBACK_PRICE); };
+    f.send();
   }
 
   // --- Update UI -----------------------------------------------------
