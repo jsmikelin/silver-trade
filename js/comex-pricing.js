@@ -1,5 +1,5 @@
 /**
- * comex-pricing.js — COMEX Live Price + Our HK Export Pricing Widget
+ * comex-pricing.js &mdash; COMEX Live Price + Our HK Export Pricing Widget
  * 
  * Data source: gold-api.com free API (XAG/USD)
  *   - Get your free API key at: https://www.gold-api.com/
@@ -13,8 +13,6 @@
  * 
  * Product-level premiums:
  *   Silver Bars:   Base + $0.00  (基准)
- *   Silver Grains: Base - $0.15
- *   Silver Powder: Base - $0.30
  */
 (function() {
   'use strict';
@@ -32,11 +30,9 @@
   var TREND  = 'downtrend';   // 'uptrend' | 'downtrend' | 'sideways'
   var SPREAD = -0.30;         // USD/oz (downtrend discount)
 
-  // Product-level premiums
+  // Product-level premiums — only Silver Bars
   var PRODUCTS = [
     { key: 'bar',   name: 'Silver Bars',   premium:  0.00, priceId: 'barPrice',   premiumId: 'barPremium'   },
-    { key: 'grain', name: 'Silver Grains', premium: -0.15, priceId: 'grainPrice', premiumId: 'grainPremium'  },
-    { key: 'powder',name: 'Silver Powder', premium: -0.30, priceId: 'powderPrice',premiumId: 'powderPremium' },
   ];
 
   // --- DOM Cache -----------------------------------------------------
@@ -84,7 +80,7 @@
 
   function fetchComexPrice() {
     return new Promise(function(resolve) {
-      // Attempt 1 — via CORS proxy
+      // Attempt 1 &mdash; via CORS proxy
       var xhr = new XMLHttpRequest();
       xhr.open('GET', PROXY_URL, true);
       xhr.setRequestHeader('x-access-token', API_KEY);
@@ -114,7 +110,7 @@
   }
 
   function attemptFallback(resolve) {
-    // Attempt 2 — fetch the page itself (server-rendered price via PHP/static update)
+    // Attempt 2 &mdash; fetch the page itself (server-rendered price via PHP/static update)
     var f = new XMLHttpRequest();
     f.open('GET', '/api/live-price.json?t=' + Date.now(), true);
     f.timeout = 3000;
@@ -150,7 +146,7 @@
     }
     previousPrice = comexPrice;
 
-    // Product prices
+    // Product prices — only Silver Bars
     for (var i = 0; i < PRODUCTS.length; i++) {
       var p = PRODUCTS[i];
       var prodPrice = ourBase + p.premium;

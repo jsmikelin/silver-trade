@@ -83,7 +83,7 @@ class Migration(migrations.Migration):
                 ('name_en', models.CharField(max_length=200, verbose_name='名称(EN)')),
                 ('name_jp', models.CharField(blank=True, max_length=200, verbose_name='名称(JP)')),
                 ('name_cn', models.CharField(blank=True, max_length=200, verbose_name='名称(CN)')),
-                ('category', models.CharField(choices=[('bar', 'Silver Bar / 银锭'), ('grain', 'Silver Grain / 银粒'), ('powder', 'Silver Powder / 银粉')], max_length=20, verbose_name='分类')),
+                ('category', models.CharField(choices=[('bar', 'Silver Bar / 银锭')], max_length=20, verbose_name='分类')),
                 ('purity', models.CharField(max_length=50, verbose_name='纯度')),
                 ('specs', models.TextField(blank=True, verbose_name='规格')),
                 ('description_en', models.TextField(verbose_name='描述(EN)')),

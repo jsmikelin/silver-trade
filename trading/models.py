@@ -4,8 +4,6 @@ from django.contrib.auth.models import User
 class Product(models.Model):
     CATEGORY_CHOICES = [
         ("bar", "Silver Bar / 银锭"),
-        ("grain", "Silver Grain / 银粒"),
-        ("powder", "Silver Powder / 银粉"),
     ]
     name_en = models.CharField(max_length=200, verbose_name="名称(EN)")
     name_jp = models.CharField(max_length=200, blank=True, verbose_name="名称(JP)")

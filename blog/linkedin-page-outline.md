@@ -29,7 +29,6 @@
 - Silver Trading & Export
 - Precious Metals Sourcing
 - LBMA-Compliant Silver Bars
-- Silver Grains & Powder Supply
 - International Trade Logistics
 - Customs Documentation
 - B2B Commodity Trading
