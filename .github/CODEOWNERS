@@ -1,0 +1,22 @@
+# Module A: Homepage & Products (Frontend)
+index.html @jsmikelin
+products/ @jsmikelin
+css/style.css @jsmikelin
+js/main.js @jsmikelin
+js/comex-pricing.js @jsmikelin
+images/ @jsmikelin
+
+# Module B: Django Backend
+config/ @jsmikelin
+trading/ @jsmikelin
+manage.py @jsmikelin
+
+# Module C: SEO & Content
+blog/ @jsmikelin
+about/ @jsmikelin
+contact/ @jsmikelin
+sitemap.xml @jsmikelin
+robots.txt @jsmikelin
+
+# Module D: Japanese
+jp/ @jsmikelin
