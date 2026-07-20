@@ -65,6 +65,58 @@ Render config is in `render.yaml`. DO NOT modify `render.yaml` without approval.
 4. **Don't change Render config** — `render.yaml`, `Procfile`, `requirements.txt` changes need explicit approval
 5. **Keep the static HTML in sync** — the homepage is `index.html`, Django serves the rest
 
+## Verification Checklist (every PR must include)
+
+Before submitting a PR, verify ALL of the following:
+
+### Functionality
+- [ ] `python manage.py runserver` starts without errors
+- [ ] Homepage loads correctly at http://localhost:8000
+- [ ] All navigation links work (Home, Products, About, Insights, Contact)
+- [ ] WhatsApp button opens wa.me/447599094629
+- [ ] Telegram button opens t.me/mikelinsuperbot
+- [ ] Contact form submits without errors
+- [ ] Japanese version (/jp/) loads correctly
+- [ ] Mobile responsive: check at 375px, 768px widths
+- [ ] All images load (silver-bar.jpg, silver-grains.jpg, silver-powder.jpg)
+
+### SEO (every PR must include before/after screenshots)
+- [ ] `<title>` tag is correct and under 60 chars
+- [ ] `<meta name="description">` is under 160 chars and unique
+- [ ] `<meta name="keywords">` is relevant
+- [ ] All images have `alt` attributes
+- [ ] `<h1>` exists exactly once per page
+- [ ] Heading hierarchy correct (h1 → h2 → h3, no skips)
+- [ ] `<link rel="canonical">` is correct
+- [ ] `hreflang` tags present (en, ja, x-default)
+- [ ] Structured data (JSON-LD) is valid: test at https://validator.schema.org
+- [ ] Open Graph tags (og:title, og:description, og:url) are correct
+- [ ] Twitter Card tags are correct
+- [ ] `robots.txt` allows crawling
+- [ ] `sitemap.xml` is up to date
+- [ ] No broken internal links
+- [ ] PageSpeed: run https://pagespeed.web.dev and attach screenshot
+
+### SEO Tools
+```bash
+# Validate structured data
+curl -s https://validator.schema.org/validate -F "url=https://www.helinsilver.com"
+
+# Check meta tags
+python manage.py check  # Django system checks
+
+# Link checker (local)
+pip install linkchecker
+linkchecker http://localhost:8000
+```
+
+### Before Merge (owner review)
+- [ ] PR description explains what changed and why
+- [ ] Screenshot of desktop + mobile attached
+- [ ] SEO check screenshots attached
+- [ ] No changes to pricing, payment terms, or legal text
+- [ ] No new external scripts/domains added
+
 ## Contact Channels (on website)
 
 | Channel | Link | Type |
