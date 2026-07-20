@@ -117,6 +117,34 @@ linkchecker http://localhost:8000
 - [ ] No changes to pricing, payment terms, or legal text
 - [ ] No new external scripts/domains added
 
+## AI-Assisted Development Rules (Claude Code / Codex)
+
+Since development is done with AI coding tools, extra caution required:
+
+### Developer Must:
+- [ ] **Understand every line** — AI wrote it ≠ you understand it. If you can't explain a change, don't commit it.
+- [ ] **Verify AI suggestions** — AI tools hallucinate APIs, dependencies, and syntax. Test every suggestion before committing.
+- [ ] **Never paste secrets** — AI tools may suggest fake API keys or tokens. Never commit them even as placeholders.
+- [ ] **Run `python verify_pr.py` locally** — catches AI-generated SEO/structure mistakes before PR.
+- [ ] **Check AI-added dependencies** — if AI suggests `pip install xxx`, verify the package is real and safe.
+- [ ] **No `--yolo` or `--danger-full-access`** — sandbox must be on. AI must not have unrestricted filesystem access.
+
+### AI Hallucination Watchlist:
+| AI often invents | Reality |
+|-----------------|---------|
+| Fake CSS classes that don't exist | Check style.css first |
+| Non-existent Django template tags | Django 4.2 only |
+| Made-up API endpoints | Only what's in this codebase |
+| Incorrect SEO meta formats | Verify against checklist above |
+| Extra npm/pip packages | Must be approved before adding |
+
+### After AI-Generated Changes:
+1. Diff the changes: `git diff` — read every line
+2. Test locally: `python manage.py runserver`
+3. Run: `python verify_pr.py`
+4. Screenshot before/after
+5. Explain in PR what the AI was asked to do and what YOU verified
+
 ## Contact Channels (on website)
 
 | Channel | Link | Type |
