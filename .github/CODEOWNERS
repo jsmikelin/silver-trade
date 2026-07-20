@@ -12,11 +12,14 @@ trading/ @jsmikelin
 manage.py @jsmikelin
 
 # Module C: SEO & Content
-blog/ @jsmikelin
-about/ @jsmikelin
-contact/ @jsmikelin
-sitemap.xml @jsmikelin
-robots.txt @jsmikelin
+blog/ @52575725
+about/ @52575725
+contact/ @52575725
+sitemap.xml @52575725
+robots.txt @52575725
+MODULE-SPLIT.md @52575725 @jsmikelin
+DEVELOPER.md @52575725 @jsmikelin
+
 
 # Module D: Japanese
 jp/ @jsmikelin
