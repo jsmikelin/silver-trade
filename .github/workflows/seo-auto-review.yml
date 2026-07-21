@@ -1,0 +1,199 @@
+name: SEO 自动审查 + 部署
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - '**.html'
+      - '**.xml'
+      - 'robots.txt'
+      - 'sitemap.xml'
+      - 'llms.txt'
+      - 'css/**'
+      - 'js/**'
+      - 'images/**'
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  seo-review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 2
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: SEO 审查 + 自动修正
+        id: review
+        shell: bash
+        run: |
+          python3 - << 'PYEOF'
+          import os, re, json, subprocess
+          from pathlib import Path
+
+          CHANGED = os.popen("git diff --name-only HEAD^ HEAD").read().strip().split('\n')
+          FIXES, MANUAL, PASSES = [], [], []
+
+          with open('/tmp/seo_report.md', 'w') as rpt:
+              def check_title(fp):
+                  if not fp.endswith(('.html','.htm')): return
+                  html = open(fp, errors='ignore').read()
+                  m = re.search(r'<title>([^<]+)</title>', html, re.I)
+                  if not m: MANUAL.append(f"{fp}: missing <title>")
+                  elif len(m.group(1)) > 60: MANUAL.append(f"{fp}: title too long ({len(m.group(1))} chars)")
+                  else: PASSES.append(f"{fp}: title OK")
+
+              def check_meta(fp):
+                  if not fp.endswith(('.html','.htm')): return
+                  html = open(fp, errors='ignore').read()
+                  m = re.search(r'<meta\s+name="description"\s+content="([^"]*)"', html, re.I)
+                  if not m: MANUAL.append(f"{fp}: missing meta description")
+                  elif len(m.group(1)) < 50: MANUAL.append(f"{fp}: meta description too short")
+                  elif len(m.group(1)) > 160: MANUAL.append(f"{fp}: meta description too long")
+                  else: PASSES.append(f"{fp}: meta description OK")
+
+              def check_og(fp):
+                  if not fp.endswith(('.html','.htm')): return
+                  html = open(fp, errors='ignore').read()
+                  missing = []
+                  for tag in ['og:title','og:description','og:url','og:image']:
+                      if f'property="{tag}"' not in html: missing.append(tag)
+                  if missing:
+                      title = re.search(r'<title>([^<]+)</title>', html, re.I)
+                      desc = re.search(r'<meta\s+name="description"\s+content="([^"]*)"', html, re.I)
+                      page = fp.replace('.html','').replace('index','')
+                      og = f"""
+          <meta property="og:title" content="{title.group(1) if title else 'Helin Silver'}">
+          <meta property="og:description" content="{desc.group(1) if desc else 'Silver bars supplier Hong Kong'}">
+          <meta property="og:url" content="https://www.helinsilver.com/{page}">
+          <meta property="og:image" content="https://www.helinsilver.com/images/silver-bar.jpg">
+          <meta property="og:type" content="website">
+          <meta name="twitter:card" content="summary_large_image">"""
+                      html = html.replace('</head>', og + '\n</head>')
+                      open(fp, 'w', encoding='utf-8').write(html)
+                      FIXES.append(f"{fp}: auto-fixed OG + Twitter Card")
+                  else: PASSES.append(f"{fp}: OG OK")
+
+              def check_alt(fp):
+                  if not fp.endswith(('.html','.htm')): return
+                  html = open(fp, errors='ignore').read()
+                  imgs = re.findall(r'<img\s+([^>]+)>', html, re.I)
+                  fixed = 0
+                  for attrs in imgs:
+                      if 'alt=' not in attrs.lower():
+                          src = re.search(r'src="([^"]+)"', attrs, re.I)
+                          alt = Path(src.group(1)).stem.replace('-',' ').replace('_',' ') if src else 'image'
+                          html = html.replace(f'<img {attrs}>', f'<img {attrs} alt="{alt}">')
+                          fixed += 1
+                  if fixed:
+                      open(fp, 'w', encoding='utf-8').write(html)
+                      FIXES.append(f"{fp}: auto-fixed {fixed} image alt(s)")
+                  elif imgs: PASSES.append(f"{fp}: alt OK")
+
+              def check_h1(fp):
+                  if not fp.endswith(('.html','.htm')): return
+                  html = open(fp, errors='ignore').read()
+                  h1s = len(re.findall(r'<h1[ >]', html, re.I))
+                  if h1s == 0: MANUAL.append(f"{fp}: missing <h1>")
+                  elif h1s > 1: MANUAL.append(f"{fp}: multiple <h1> ({h1s})")
+                  else: PASSES.append(f"{fp}: h1 OK")
+
+              def check_schema(fp):
+                  if not fp.endswith(('.html','.htm')): return
+                  html = open(fp, errors='ignore').read()
+                  if 'application/ld+json' in html or 'itemprop' in html: PASSES.append(f"{fp}: schema OK")
+                  else: MANUAL.append(f"{fp}: missing JSON-LD structured data")
+
+              def check_canonical(fp):
+                  if not fp.endswith(('.html','.htm')): return
+                  html = open(fp, errors='ignore').read()
+                  if 'canonical' in html.lower():
+                      PASSES.append(f"{fp}: canonical OK")
+                  else:
+                      page = fp.replace('.html','').replace('index','')
+                      html = html.replace('</head>', f'<link rel="canonical" href="https://www.helinsilver.com/{page}">\n</head>')
+                      open(fp, 'w', encoding='utf-8').write(html)
+                      FIXES.append(f"{fp}: auto-fixed canonical")
+
+              def check_hreflang(fp):
+                  if not fp.endswith(('.html','.htm')): return
+                  html = open(fp, errors='ignore').read()
+                  if 'hreflang' in html:
+                      PASSES.append(f"{fp}: hreflang OK")
+                  else:
+                      page = fp.replace('.html','').replace('index','').strip('/')
+                      hf = f'<link rel="alternate" hreflang="en" href="https://www.helinsilver.com/{page}">\n<link rel="alternate" hreflang="ja" href="https://www.helinsilver.com/jp/{page}">\n<link rel="alternate" hreflang="x-default" href="https://www.helinsilver.com/{page}">'
+                      html = html.replace('</head>', hf + '\n</head>')
+                      open(fp, 'w', encoding='utf-8').write(html)
+                      FIXES.append(f"{fp}: auto-fixed hreflang")
+
+              def update_sitemap():
+                  html_files = []
+                  for root, dirs, files in os.walk('.'):
+                      dirs[:] = [d for d in dirs if d not in ('.git','.github','__pycache__','venv','node_modules')]
+                      for f in files:
+                          if f.endswith(('.html','.htm')): html_files.append(str(Path(root)/f).replace('\\','/').lstrip('./'))
+                  urls = '\n'.join(f'  <url><loc>https://www.helinsilver.com/{p.replace(".html","").replace("index","")}</loc></url>' for p in sorted(html_files))
+                  sitemap = f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}\n</urlset>\n'
+                  if Path('sitemap.xml').read_text() != sitemap:
+                      Path('sitemap.xml').write_text(sitemap)
+                      FIXES.append("sitemap.xml: auto-updated")
+
+              # Run checks
+              for f in CHANGED:
+                  f = f.strip()
+                  if not f: continue
+                  check_title(f); check_meta(f); check_og(f); check_alt(f)
+                  check_h1(f); check_schema(f); check_canonical(f); check_hreflang(f)
+              update_sitemap()
+
+              # Write report
+              all_pass = len(MANUAL) == 0
+              rpt.write("## SEO Auto-Review\n\n")
+              rpt.write(f"**{len(CHANGED)} files** | {len(PASSES)} passed | {len(FIXES)} auto-fixed | {len(MANUAL)} manual\n\n")
+              if FIXES:
+                  rpt.write("### Auto-Fixed\n")
+                  for f in FIXES: rpt.write(f"- {f}\n")
+              if PASSES:
+                  rpt.write("\n### Passed\n")
+                  for p in PASSES[:10]: rpt.write(f"- {p}\n")
+              if MANUAL:
+                  rpt.write("\n### Needs Manual Fix\n")
+                  for m in MANUAL: rpt.write(f"- {m}\n")
+                  rpt.write("\n> Fix and push, or comment `@hermes recheck` to re-trigger\n")
+              if all_pass:
+                  rpt.write("\n### All Passed - Auto-Merging...\n")
+
+              # Commit auto-fixes
+              if FIXES:
+                  subprocess.run(["git","config","user.name","Hermes SEO Bot"])
+                  subprocess.run(["git","config","user.email","bot@hermes.agent"])
+                  subprocess.run(["git","add","-A"])
+                  subprocess.run(["git","commit","-m","Auto-fix: SEO corrections"])
+                  subprocess.run(["git","push"])
+
+              # Set output
+              env_file = os.environ.get('GITHUB_OUTPUT','/tmp/output')
+              open(env_file,'a').write(f"all_pass={str(all_pass).lower()}\n")
+          PYEOF
+
+      - name: 评论 PR
+        if: always()
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          filePath: /tmp/seo_report.md
+          comment_tag: seo-review
+
+      - name: 自动 merge
+        if: ${{ steps.review.outputs.all_pass == 'true' }}
+        run: gh pr merge ${{ github.event.pull_request.number }} --merge
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
