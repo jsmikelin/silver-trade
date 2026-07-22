@@ -33,59 +33,20 @@ gtag('config', 'G-QQ5SDMPS8K');
 <meta content="https://www.helinsilver.com/images/silver-bar.jpg" property="og:image"/>
 <meta content="1200" property="og:image:width"/>
 <meta content="630" property="og:image:height"/>
-<meta content="Contact Us - Hong Kong Changjiang International | Silver Trading Inquiries" name="twitter:title"/><meta content="Contact Hong Kong Changjiang International Limited for silver trading inquiries. Reach us via email at mikelin@helinsilver.com, WhatsApp +447****4629." name="twitter:description"/><meta content="https://www.helinsilver.com/images/silver-bar.jpg" name="twitter:image"/>
-<style>
-
-/* [Site Inspector] Ensure minimum 16px font size for mobile readability */
+<meta content="Contact Us - Hong Kong Changjiang International | Silver Trading Inquiries" name="twitter:title"/><meta content="Contact Hong Kong Changjiang International Limited for silver trading inquiries. Reach us via email at mikelin@helinsilver.com, WhatsApp +447****4629." name="twitter:description"/><meta content="https://www.helinsilver.com/images/silver-bar.jpg" name="twitter:image"/><style>
+/* Auto-fix: ensure minimum 16px font size for mobile readability */
 @media (max-width: 768px) {
-    body, p, li, span, a, div, td, th, label, input, textarea, select, button {
-        font-size: 16px !important;
+    body, p, li, span, a, div {
+        font-size: max(16px, inherit) !important;
     }
 }
-
-
-/* [Site Inspector] Ensure minimum 48px touch targets for mobile */
-@media (pointer: coarse) {
-    a, button, [role="button"], input[type="submit"], input[type="button"],
-    .btn, .button, [onclick] {
+/* Auto-fix: ensure minimum 48px touch targets */
+@media (max-width: 1024px) {
+    a, button, [role="button"], input[type="submit"] {
         min-width: 48px;
         min-height: 48px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
     }
-}
-
-
-/* [Site Inspector] Ensure minimum 16px font size for mobile readability */
-@media (max-width: 768px) {
-    body, p, li, span, a, div, td, th, label, input, textarea, select, button {
-        font-size: 16px !important;
-    }
-}
-
-
-/* [Site Inspector] Ensure minimum 48px touch targets for mobile */
-@media (pointer: coarse) {
-    a, button, [role="button"], input[type="submit"], input[type="button"],
-    .btn, .button, [onclick] {
-        min-width: 48px;
-        min-height: 48px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-    }
-}
-
-
-/* [Site Inspector] Ensure minimum 16px font size for mobile readability */
-@media (max-width: 768px) {
-    body, p, li, span, a, div, td, th, label, input, textarea, select, button {
-        font-size: 16px !important;
-    }
-}
-</style>
-<script type="application/ld+json">{
+}</style><script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": "Hong Kong Changjiang International Limited",
@@ -99,12 +60,6 @@ gtag('config', 'G-QQ5SDMPS8K');
     "addressRegion": "Kowloon",
     "addressCountry": "HK"
   }
-}</script><script type="application/ld+json">{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Contact Us - Hong Kong Changjiang International | Silver ...",
-  "description": "Contact Hong Kong Changjiang International Limited for silver trading inquiries. Reach us via email at mikelin@helinsilver.com, WhatsApp +447****4629.",
-  "url": "https://www.helinsilver.com/contact/"
 }</script></head>
 <body>
 <header><nav><a class="logo" href="/"><div class="logo-icon">CJ</div><div class="logo-text">HK <span>Changjiang</span></div></a><ul class="nav-links" id="navLinks"><li><a href="/">Home</a></li><li><a href="/products/">Products</a></li><li><a href="/about/">About</a></li><li><a href="/blog/">Insights</a></li><li><a class="active" href="/contact/">Contact</a></li><li class="lang-switch"><a class="active" href="/contact/">EN</a><a href="/jp/contact/">JP</a></li></ul><div class="mobile-toggle" id="mobileToggle" onclick="toggleNav()"><span></span><span></span><span></span></div></nav></header>
@@ -126,7 +81,7 @@ gtag('config', 'G-QQ5SDMPS8K');
 <input name="name" placeholder="Your Name *" required="" type="text"/>
 <input name="email" placeholder="Your Email *" required="" type="email"/>
 <input name="phone" placeholder="Your Phone / WhatsApp" type="tel"/>
-<select aria-label="Product" name="product">
+<select name="product">
 <option value="">Interested Product</option>
 <option value="silver-bars">Silver Bars 99.99%</option>
 <option value="other">Other / General Inquiry</option>

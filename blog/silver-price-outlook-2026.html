@@ -70,56 +70,19 @@
 .highlight-box { background: var(--cream); border-left: 4px solid var(--gold); padding: 20px 24px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin: 24px 0; }
 .highlight-box p { margin-bottom: 0; font-size: 0.95rem; }
 
-
-/* [Site Inspector] Ensure minimum 16px font size for mobile readability */
+/* Auto-fix: ensure minimum 16px font size for mobile readability */
 @media (max-width: 768px) {
-    body, p, li, span, a, div, td, th, label, input, textarea, select, button {
-        font-size: 16px !important;
+    body, p, li, span, a, div {
+        font-size: max(16px, inherit) !important;
     }
 }
-
-
-/* [Site Inspector] Ensure minimum 48px touch targets for mobile */
-@media (pointer: coarse) {
-    a, button, [role="button"], input[type="submit"], input[type="button"],
-    .btn, .button, [onclick] {
+/* Auto-fix: ensure minimum 48px touch targets */
+@media (max-width: 1024px) {
+    a, button, [role="button"], input[type="submit"] {
         min-width: 48px;
         min-height: 48px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
     }
-}
-
-
-/* [Site Inspector] Ensure minimum 16px font size for mobile readability */
-@media (max-width: 768px) {
-    body, p, li, span, a, div, td, th, label, input, textarea, select, button {
-        font-size: 16px !important;
-    }
-}
-
-
-/* [Site Inspector] Ensure minimum 48px touch targets for mobile */
-@media (pointer: coarse) {
-    a, button, [role="button"], input[type="submit"], input[type="button"],
-    .btn, .button, [onclick] {
-        min-width: 48px;
-        min-height: 48px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-    }
-}
-
-
-/* [Site Inspector] Ensure minimum 16px font size for mobile readability */
-@media (max-width: 768px) {
-    body, p, li, span, a, div, td, th, label, input, textarea, select, button {
-        font-size: 16px !important;
-    }
-}
-</style>
+}</style>
 <!-- Google tag (gtag.js) -->
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-QQ5SDMPS8K"></script>
 <script>
@@ -162,12 +125,6 @@ gtag('config', 'G-QQ5SDMPS8K');
       "item": "https://www.helinsilver.com/blog/silver-price-outlook-2026.html"
     }
   ]
-}</script><script type="application/ld+json">{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Silver Price Outlook Q3 2026: Supply Constraints and Indu...",
-  "description": "Comprehensive Q3 2026 silver price outlook. Supply constraints, solar & electronics demand surges, mine output deficits, and what it means for buyers. Expert...",
-  "url": "https://www.helinsilver.com/blog/silver-price-outlook-2026.html"
 }</script><script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "Article",

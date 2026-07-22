@@ -73,67 +73,30 @@
 .highlight-box { background: var(--cream); border-left: 4px solid var(--gold); padding: 20px 24px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin: 24px 0; }
 .highlight-box p { margin-bottom: 0; font-size: 0.95rem; }
 
-
-/* [Site Inspector] Prevent horizontal overflow on all viewports */
-html, body {
-    overflow-x: hidden;
-    max-width: 100vw;
-}
-img, table, pre, iframe, video, canvas, svg {
-    max-width: 100%;
-    height: auto;
-}
-
-
-/* [Site Inspector] Ensure minimum 16px font size for mobile readability */
+/* Auto-fix: prevent horizontal overflow on mobile */
 @media (max-width: 768px) {
-    body, p, li, span, a, div, td, th, label, input, textarea, select, button {
-        font-size: 16px !important;
+    html, body {
+        overflow-x: hidden;
+        max-width: 100vw;
+    }
+    img, table, pre, iframe {
+        max-width: 100%;
+        height: auto;
     }
 }
-
-
-/* [Site Inspector] Ensure minimum 48px touch targets for mobile */
-@media (pointer: coarse) {
-    a, button, [role="button"], input[type="submit"], input[type="button"],
-    .btn, .button, [onclick] {
+/* Auto-fix: ensure minimum 16px font size for mobile readability */
+@media (max-width: 768px) {
+    body, p, li, span, a, div {
+        font-size: max(16px, inherit) !important;
+    }
+}
+/* Auto-fix: ensure minimum 48px touch targets */
+@media (max-width: 1024px) {
+    a, button, [role="button"], input[type="submit"] {
         min-width: 48px;
         min-height: 48px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
     }
-}
-
-
-/* [Site Inspector] Ensure minimum 16px font size for mobile readability */
-@media (max-width: 768px) {
-    body, p, li, span, a, div, td, th, label, input, textarea, select, button {
-        font-size: 16px !important;
-    }
-}
-
-
-/* [Site Inspector] Ensure minimum 48px touch targets for mobile */
-@media (pointer: coarse) {
-    a, button, [role="button"], input[type="submit"], input[type="button"],
-    .btn, .button, [onclick] {
-        min-width: 48px;
-        min-height: 48px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-    }
-}
-
-
-/* [Site Inspector] Ensure minimum 16px font size for mobile readability */
-@media (max-width: 768px) {
-    body, p, li, span, a, div, td, th, label, input, textarea, select, button {
-        font-size: 16px !important;
-    }
-}
-</style>
+}</style>
 <!-- Google tag (gtag.js) -->
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-QQ5SDMPS8K"></script>
 <script>
@@ -176,12 +139,6 @@ gtag('config', 'G-QQ5SDMPS8K');
       "item": "https://www.helinsilver.com/blog/hong-kong-silver-export-guide.html"
     }
   ]
-}</script><script type="application/ld+json">{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Hong Kong Silver Export Guide 2026: LBMA Compliance, Cust...",
-  "description": "Complete guide to exporting silver from Hong Kong. LBMA compliance requirements, customs documentation, shipping logistics, quality certifications, and best ...",
-  "url": "https://www.helinsilver.com/blog/hong-kong-silver-export-guide.html"
 }</script><script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "Article",
