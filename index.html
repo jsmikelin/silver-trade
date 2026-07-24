@@ -68,7 +68,8 @@ gtag('config', 'G-QQ5SDMPS8K');
       "item": "https://www.helinsilver.com/"
     }
   ]
-}</script></head>
+}</script><style>.hero-pricing{display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:center;}.hero-pricing-comex,.hero-pricing-our{flex:0 0 auto;}.hero-pricing-chart{flex:1;min-width:260px;max-width:400px;height:150px;}@media(max-width:768px){.hero-pricing{flex-direction:column;}.hero-pricing-chart{max-width:100%;width:100%;}}</style>
+</head>
 <body>
 <header><nav><a class="logo" href="/"><div class="logo-icon">CJ</div><div class="logo-text">HK <span>Changjiang</span><span class="logo-subtitle">International Limited</span></div></a><ul class="nav-links" id="navLinks"><li><a class="active" href="/">Home</a></li><li><a href="/products/">Products</a></li><li><a href="/about/">About</a></li><li><a href="/blog/">Insights</a></li><li><a href="/contact/">Contact</a></li><li class="lang-switch"><a class="active" href="/">EN</a><a href="/jp/">JP</a></li></ul><div class="mobile-toggle" id="mobileToggle" onclick="toggleNav()"><span></span><span></span><span></span></div></nav></header>
 <section class="hero"><div class="container"><div class="hero-badges"><span class="hero-badge">LBMA Compliant</span><span class="hero-badge">99.99% Purity</span><span class="hero-badge">Hong Kong Based</span><span class="hero-badge">Global Delivery</span></div><h1>Premium Silver Trading — <span>Trusted by US &amp; Japanese Markets</span></h1><p>Hong Kong Changjiang International Limited supplies high-purity silver bars, silver grains, and silver powder to buyers in the United States, Japan, and global markets. Based in Hong Kong with LBMA-compliant sourcing, third-party quality certification, and competitive pricing.</p>
@@ -238,11 +239,14 @@ function toggleFAQ(btn) {
   // Draw trend chart
   const history = priceData.history || [];
   if (history.length > 0) {
-    const chartContainer = document.createElement('div');
-    chartContainer.className = 'price-chart-container';
-    chartContainer.innerHTML = '<h2 style="text-align:center;margin:40px 0 16px;font-size:1.3rem;">Silver Price Trend (30 Days)</h2><div style="max-width:900px;margin:0 auto;padding:0 16px;"><canvas id="priceTrendChart"></canvas></div>';
-    const heroSection = document.querySelector('.hero');
-    if (heroSection) heroSection.after(chartContainer);
+    // Insert mini chart next to the price widget
+    const pricingDiv = document.querySelector('.hero-pricing');
+    if (pricingDiv) {
+      const chartWrap = document.createElement('div');
+      chartWrap.className = 'hero-pricing-chart';
+      chartWrap.innerHTML = '<canvas id="priceTrendChart" style="width:100%;height:100%;"></canvas>';
+      pricingDiv.appendChild(chartWrap);
+    }
 
     const ctx = document.getElementById('priceTrendChart').getContext('2d');
     const labels = history.map(h => h.date.slice(5));
@@ -263,7 +267,7 @@ function toggleFAQ(btn) {
       options: {
         responsive: true,
         maintainAspectRatio: true,
-        aspectRatio: 2.5,
+        aspectRatio: 1.8,
         interaction: { intersect: false, mode: 'index' },
         plugins: {
           legend: { position: 'bottom' },
