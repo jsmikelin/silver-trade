@@ -34,4 +34,10 @@
   <url><loc>https://www.helinsilver.com/jp/blog/lbma-standards-guide</loc><lastmod>2026-07-26</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://www.helinsilver.com/jp/blog/silver-shipping-air-vs-sea</loc><lastmod>2026-07-26</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://www.helinsilver.com/jp/blog/lme-silver-pricing</loc><lastmod>2026-07-26</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url>
+    <loc>https://www.helinsilver.com/feed.xml</loc>
+    <lastmod>2026-07-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.3</priority>
+  </url>
 </urlset>

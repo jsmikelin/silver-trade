@@ -15,3 +15,6 @@ User-agent: CCBot
 Allow: /
 
 Sitemap: https://www.helinsilver.com/sitemap.xml
+
+# RSS Feed
+RSS: https://www.helinsilver.com/feed.xml
