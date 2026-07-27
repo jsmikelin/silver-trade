@@ -181,7 +181,7 @@ nav {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: rgba(255,255,255,0.4);
+  color: rgba(255,255,255,0.65);
   font-weight: 500;
 }
 .hero-pricing-price {
@@ -199,7 +199,7 @@ nav {
 }
 .hero-pricing-divider {
   width: 1px;
-  background: rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.15);
   align-self: stretch;
 }
 .hero-pricing-products {
@@ -214,7 +214,7 @@ nav {
   font-size: 0.95rem;
 }
 .hero-pricing-row .prod-name {
-  color: rgba(255,255,255,0.55);
+  color: rgba(255,255,255,0.75);
   min-width: 100px;
   font-size: 0.88rem;
   font-weight: 500;
@@ -226,12 +226,12 @@ nav {
   font-size: 1.05rem;
 }
 .hero-pricing-row .prod-premium {
-  color: rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.6);
   font-size: 0.78rem;
 }
 .hero-pricing-spread {
   font-size: 0.78rem;
-  color: rgba(255,255,255,0.35);
+  color: rgba(255,255,255,0.55);
   margin-top: 4px;
   font-weight: 500;
 }
@@ -250,6 +250,19 @@ nav {
   }
   .hero-pricing-price {
     font-size: 1.6rem;
+  }
+}
+
+.hero-pricing-chart {
+  flex: 1;
+  min-width: 260px;
+  max-width: 400px;
+  height: 180px;
+}
+@media (max-width: 768px) {
+  .hero-pricing-chart {
+    max-width: 100%;
+    width: 100%;
   }
 }
 
@@ -487,7 +500,7 @@ footer ul a:hover { color: var(--gold-light); }
   flex-wrap: wrap;
 }
 .price-bar-label {
-  color: rgba(255,255,255,0.4);
+  color: rgba(255,255,255,0.65);
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -498,7 +511,7 @@ footer ul a:hover { color: var(--gold-light); }
   white-space: nowrap;
 }
 .price-bar-source {
-  color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.7);
   font-size: 0.78rem;
 }
 .price-bar-value {
@@ -508,12 +521,12 @@ footer ul a:hover { color: var(--gold-light); }
   font-variant-numeric: tabular-nums;
 }
 .price-bar-unit {
-  color: rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.55);
   font-size: 0.72rem;
 }
 .price-bar-update {
   margin-left: auto;
-  color: rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.5);
   font-size: 0.72rem;
 }
 
