@@ -19,7 +19,10 @@ import urllib.error
 from pathlib import Path
 from html.parser import HTMLParser
 
-REPO = Path.home() / ".hermes" / "website" / "silver-trade"
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+
+REPO = Path(__file__).resolve().parent
 
 class SEOValidator(HTMLParser):
     def __init__(self):
@@ -147,6 +150,43 @@ def check_html(html_path: Path) -> dict:
     else:
         warnings.append("No JSON-LD structured data found")
 
+    # Prevent recurrence of the About-page corruption introduced by auto-fix branches.
+    if html_path.as_posix().endswith("about/index.html"):
+        if "S..." in (v.title or "") or "gl..." in (v.meta_desc or ""):
+            issues.append("About metadata contains auto-truncated placeholder text")
+        if "About Us - Hong Kong Changjiang International Limited | S..." in content:
+            issues.append("About page contains an auto-injected duplicate heading")
+        if any(block.get("@type") == "Article" for block in v.json_ld if isinstance(block, dict)):
+            issues.append("About page must not use Article structured data")
+
+    if "/>/>" in content or "/>>" in content:
+        issues.append("Malformed self-closing tag")
+
+    if re.search(
+        r"<body>\s*<(?:h1|h2)\b[^>]*>.*?</(?:h1|h2)>\s*<header",
+        content,
+        re.IGNORECASE | re.DOTALL,
+    ):
+        issues.append("Auto-injected heading appears before the site header")
+
+    if "..." in (v.title or "") or "..." in (v.meta_desc or ""):
+        issues.append("Metadata contains auto-truncated placeholder text")
+
+    article_schemas = [
+        block for block in v.json_ld
+        if isinstance(block, dict) and block.get("@type") in {"Article", "NewsArticle"}
+    ]
+    if len(article_schemas) > 1:
+        issues.append("Multiple article structured-data blocks")
+
+    if re.search(
+        r'<a\b(?=[^>]*\bclass=["\'][^"\']*\bread-more\b[^"\']*["\'])'
+        r'(?=[^>]*\bhref=["\']#["\'])[^>]*>',
+        content,
+        re.IGNORECASE,
+    ):
+        issues.append("Read More link uses a placeholder href")
+
     # External scripts
     for s in v.scripts:
         if "googletagmanager" not in s:
@@ -200,12 +240,30 @@ def main():
     all_ok = True
 
     # 1. HTML checks
-    index = REPO / "index.html"
-    if index.exists():
-        print("\n📄 Homepage SEO Check:")
+    pages = [
+        ("Homepage", REPO / "index.html"),
+        ("About page", REPO / "about" / "index.html"),
+        ("About template", REPO / "trading" / "templates" / "about" / "index.html"),
+        ("Contact page", REPO / "contact" / "index.html"),
+        ("Contact template", REPO / "trading" / "templates" / "contact" / "index.html"),
+        ("Blog index", REPO / "blog" / "index.html"),
+        ("Blog template", REPO / "trading" / "templates" / "blog" / "index.html"),
+        ("Silver outlook article", REPO / "blog" / "silver-price-outlook-2026.html"),
+        ("Hong Kong export article", REPO / "blog" / "hong-kong-silver-export-guide.html"),
+        ("US import article", REPO / "blog" / "us-silver-import-guide.html"),
+        ("Japan market article", REPO / "blog" / "japan-silver-market-opportunities" / "index.html"),
+        ("LBMA article", REPO / "blog" / "lbma-standards-guide" / "index.html"),
+        ("Shipping article", REPO / "blog" / "silver-shipping-air-vs-sea" / "index.html"),
+        ("LME pricing article", REPO / "blog" / "lme-silver-pricing" / "index.html"),
+    ]
+    for label, index in pages:
+        if not index.exists():
+            continue
+        print(f"\n📄 {label} SEO Check:")
         result = check_html(index)
         print(f"  Title: {result['title']}")
-        print(f"  Description: {result['description'][:100]}...")
+        description = result['description'] or ""
+        print(f"  Description: {description[:100]}...")
         print(f"  H1: {result['h1_count']}, H2: {result['h2_count']}, H3: {result['h3_count']}")
         print(f"  Links: {result['links']}")
 
