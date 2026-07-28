@@ -16,6 +16,7 @@ import re
 import sys
 import urllib.request
 import urllib.error
+from urllib.parse import urlparse
 from pathlib import Path
 from html.parser import HTMLParser
 
@@ -36,6 +37,7 @@ class SEOValidator(HTMLParser):
         self.h3_count = 0
         self.imgs_without_alt = 0
         self.links = []
+        self.read_more_links = []
         self.scripts = []
         self.json_ld = []
         self.canonical = None
@@ -64,6 +66,8 @@ class SEOValidator(HTMLParser):
                 self.imgs_without_alt += 1
         elif tag == "a" and "href" in attrs_dict:
             self.links.append(attrs_dict["href"])
+            if "read-more" in attrs_dict.get("class", "").split():
+                self.read_more_links.append(attrs_dict["href"])
         elif tag == "script":
             self.in_script = True
             self.script_type = attrs_dict.get("type", "")
@@ -187,6 +191,14 @@ def check_html(html_path: Path) -> dict:
     ):
         issues.append("Read More link uses a placeholder href")
 
+    for href in v.read_more_links:
+        if href.startswith(("#", "http://", "https://", "mailto:", "tel:")):
+            continue
+        path = urlparse(href).path.lstrip("/")
+        target = REPO / path if Path(path).suffix else REPO / path / "index.html"
+        if not target.exists():
+            issues.append(f"Read More link points to missing local page: {href}")
+
     # External scripts
     for s in v.scripts:
         if "googletagmanager" not in s:
@@ -227,6 +239,27 @@ def check_sensitive_changes(diff_output: str) -> list:
     return alerts
 
 
+def check_sitemap_local_urls(sitemap_path: Path) -> list[str]:
+    """Return same-site sitemap URLs whose static target does not exist."""
+    content = sitemap_path.read_text(encoding="utf-8", errors="replace")
+    urls = set(re.findall(r'https://(?:www\.)?helinsilver\.com[^"<\s]*', content))
+    missing = []
+
+    for url in sorted(urls):
+        path = urlparse(url).path.lstrip("/")
+        if not path:
+            target = REPO / "index.html"
+        elif Path(path).suffix:
+            target = REPO / path
+        else:
+            target = REPO / path / "index.html"
+
+        if not target.exists():
+            missing.append(url)
+
+    return missing
+
+
 def main():
     import argparse
     parser = argparse.ArgumentParser(description="Verify silver-trade PR")
@@ -246,6 +279,8 @@ def main():
         ("About template", REPO / "trading" / "templates" / "about" / "index.html"),
         ("Contact page", REPO / "contact" / "index.html"),
         ("Contact template", REPO / "trading" / "templates" / "contact" / "index.html"),
+        ("Products page", REPO / "products" / "index.html"),
+        ("Products template", REPO / "trading" / "templates" / "products" / "index.html"),
         ("Blog index", REPO / "blog" / "index.html"),
         ("Blog template", REPO / "trading" / "templates" / "blog" / "index.html"),
         ("Silver outlook article", REPO / "blog" / "silver-price-outlook-2026.html"),
@@ -255,9 +290,40 @@ def main():
         ("LBMA article", REPO / "blog" / "lbma-standards-guide" / "index.html"),
         ("Shipping article", REPO / "blog" / "silver-shipping-air-vs-sea" / "index.html"),
         ("LME pricing article", REPO / "blog" / "lme-silver-pricing" / "index.html"),
+        ("Japanese homepage", REPO / "jp" / "index.html"),
+        ("Japanese homepage template", REPO / "trading" / "templates" / "jp" / "index.html"),
+        ("Japanese About page", REPO / "jp" / "about" / "index.html"),
+        ("Japanese About template", REPO / "trading" / "templates" / "jp" / "about" / "index.html"),
+        ("Japanese Contact page", REPO / "jp" / "contact" / "index.html"),
+        ("Japanese Contact template", REPO / "trading" / "templates" / "jp" / "contact" / "index.html"),
+        ("Japanese Products page", REPO / "jp" / "products" / "index.html"),
+        ("Japanese Products template", REPO / "trading" / "templates" / "jp" / "products" / "index.html"),
+        ("Japanese Blog index", REPO / "jp" / "blog" / "index.html"),
+        ("Japanese Blog template", REPO / "trading" / "templates" / "jp" / "blog" / "index.html"),
+        ("Japanese silver outlook article", REPO / "jp" / "blog" / "silver-price-outlook-2026.html"),
+        ("Japanese Hong Kong export article", REPO / "jp" / "blog" / "hong-kong-silver-export-guide.html"),
+        ("Japanese US import article", REPO / "jp" / "blog" / "us-silver-import-guide.html"),
+        ("Japanese Q3 market article", REPO / "jp" / "blog" / "silver-market-q3-2026" / "index.html"),
+        ("Japanese market opportunity article", REPO / "jp" / "blog" / "japan-silver-market-opportunities" / "index.html"),
+        ("Japanese LBMA article", REPO / "jp" / "blog" / "lbma-standards-guide" / "index.html"),
+        ("Japanese shipping article", REPO / "jp" / "blog" / "silver-shipping-air-vs-sea" / "index.html"),
+        ("Japanese LME pricing article", REPO / "jp" / "blog" / "lme-silver-pricing" / "index.html"),
     ]
+
+    # Cover every HTML file, including newly added pages that were not manually listed.
+    listed_paths = {path for _, path in pages}
+    for index in sorted(REPO.rglob("*.html")):
+        if any(part in {".git", ".venv", "node_modules"} for part in index.parts):
+            continue
+        if index.parent == REPO and index.name.lower().startswith("google"):
+            continue
+        if index not in listed_paths:
+            pages.append((str(index.relative_to(REPO)), index))
+
     for label, index in pages:
         if not index.exists():
+            print(f"\n❌ {label}: expected file is missing: {index.relative_to(REPO)}")
+            all_ok = False
             continue
         print(f"\n📄 {label} SEO Check:")
         result = check_html(index)
@@ -272,6 +338,15 @@ def main():
             all_ok = False
         for w in result["warnings"]:
             print(f"  ⚠️  {w}")
+
+    print("\n🗺️  Sitemap local-target check:")
+    missing_sitemap_urls = check_sitemap_local_urls(REPO / "sitemap.xml")
+    if missing_sitemap_urls:
+        all_ok = False
+        for url in missing_sitemap_urls:
+            print(f"  ❌ Sitemap URL has no local page: {url}")
+    else:
+        print("  ✅ All same-site sitemap URLs have local targets")
 
     # 2. Diff checks
     if args.diff:

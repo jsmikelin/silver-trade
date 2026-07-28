@@ -3,7 +3,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from verify_pr import check_html
+from verify_pr import check_html, check_sitemap_local_urls
 
 
 def page(body: str, *, extra_head: str = "") -> str:
@@ -50,8 +50,28 @@ class HtmlRegressionTests(unittest.TestCase):
         self.assertIn("Multiple article structured-data blocks", issues)
 
     def test_accepts_real_article_link(self):
-        issues = self.check(page('<header></header><h1>Test</h1><a class="read-more" href="/blog/article/">Read More</a>'))
+        issues = self.check(page('<header></header><h1>Test</h1><a class="read-more" href="/jp/blog/lme-silver-pricing/">続きを読む</a>'))
         self.assertEqual([], issues)
+
+    def test_rejects_missing_read_more_target(self):
+        issues = self.check(page('<header></header><h1>Test</h1><a class="read-more" href="/jp/blog/missing/">続きを読む</a>'))
+        self.assertIn("Read More link points to missing local page: /jp/blog/missing/", issues)
+
+    def test_accepts_valid_self_closing_tag(self):
+        issues = self.check(page("<header></header><h1>Test</h1>", extra_head='<link rel="dns-prefetch" href="https://example.com"/>'))
+        self.assertEqual([], issues)
+
+    def test_sitemap_rejects_missing_same_site_target(self):
+        with tempfile.TemporaryDirectory() as directory:
+            sitemap = Path(directory) / "sitemap.xml"
+            sitemap.write_text(
+                '<urlset><url><loc>https://www.helinsilver.com/jp/blog/missing/</loc></url></urlset>',
+                encoding="utf-8",
+            )
+            self.assertEqual(
+                ["https://www.helinsilver.com/jp/blog/missing/"],
+                check_sitemap_local_urls(sitemap),
+            )
 
 
 if __name__ == "__main__":
