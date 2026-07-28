@@ -179,6 +179,14 @@ def check_html(html_path: Path) -> dict:
     if len(article_schemas) > 1:
         issues.append("Multiple article structured-data blocks")
 
+    if re.search(
+        r'<a\b(?=[^>]*\bclass=["\'][^"\']*\bread-more\b[^"\']*["\'])'
+        r'(?=[^>]*\bhref=["\']#["\'])[^>]*>',
+        content,
+        re.IGNORECASE,
+    ):
+        issues.append("Read More link uses a placeholder href")
+
     # External scripts
     for s in v.scripts:
         if "googletagmanager" not in s:
@@ -236,10 +244,17 @@ def main():
         ("Homepage", REPO / "index.html"),
         ("About page", REPO / "about" / "index.html"),
         ("About template", REPO / "trading" / "templates" / "about" / "index.html"),
+        ("Contact page", REPO / "contact" / "index.html"),
+        ("Contact template", REPO / "trading" / "templates" / "contact" / "index.html"),
         ("Blog index", REPO / "blog" / "index.html"),
+        ("Blog template", REPO / "trading" / "templates" / "blog" / "index.html"),
         ("Silver outlook article", REPO / "blog" / "silver-price-outlook-2026.html"),
         ("Hong Kong export article", REPO / "blog" / "hong-kong-silver-export-guide.html"),
         ("US import article", REPO / "blog" / "us-silver-import-guide.html"),
+        ("Japan market article", REPO / "blog" / "japan-silver-market-opportunities" / "index.html"),
+        ("LBMA article", REPO / "blog" / "lbma-standards-guide" / "index.html"),
+        ("Shipping article", REPO / "blog" / "silver-shipping-air-vs-sea" / "index.html"),
+        ("LME pricing article", REPO / "blog" / "lme-silver-pricing" / "index.html"),
     ]
     for label, index in pages:
         if not index.exists():
