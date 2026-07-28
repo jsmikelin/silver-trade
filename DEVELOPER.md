@@ -57,6 +57,26 @@ git push origin main
 
 Render config is in `render.yaml`. DO NOT modify `render.yaml` without approval.
 
+## Daily Silver Price Feed
+
+The homepage reads the validated cache at `/api/live-price.json`. GitHub Actions
+runs `.github/workflows/update-silver-price.yml` after each completed weekday and
+rebuilds the 30-day chart from the GoldAPI XAG/USD daily history endpoint.
+
+Local setup:
+
+```bash
+copy .env.example .env
+# Set GOLD_API_KEY in .env, then run:
+python scripts/update_silver_price.py
+```
+
+Repository setup: open **Settings -> Secrets and variables -> Actions**, create a
+repository secret named `GOLD_API_KEY`, then run **Update daily silver price**
+once from the Actions tab. Never put the real key in `.env.example` or frontend
+JavaScript. If a fetch or validation fails, the updater leaves the last valid
+JSON file untouched.
+
 ## Important Rules
 
 1. **Never commit secrets** — API keys, tokens, passwords go in Render Environment Variables, NOT in code
