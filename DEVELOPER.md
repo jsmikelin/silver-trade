@@ -4,7 +4,7 @@
 
 | Item | Detail |
 |------|--------|
-| **Site** | https://www.helinsilver.com |
+| **Site** | https://helinsilver.com |
 | **Brand** | HK Changjiang International Limited (香港长江国际有限公司) |
 | **Business** | Silver bars/grains/powder export, Hong Kong based |
 | **Stack** | Django 4.2 + Gunicorn + static HTML |
@@ -100,7 +100,7 @@ Before submitting a PR, verify ALL of the following:
 ### SEO Tools
 ```bash
 # Validate structured data
-curl -s https://validator.schema.org/validate -F "url=https://www.helinsilver.com"
+curl -s https://validator.schema.org/validate -F "url=https://helinsilver.com"
 
 # Check meta tags
 python manage.py check  # Django system checks

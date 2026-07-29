@@ -9,7 +9,7 @@
 ### Basic Info
 - **Page Name:** Hong Kong Changjiang International Limited
 - **Alternate Name:** Helin Silver
-- **Website:** https://www.helinsilver.com
+- **Website:** https://helinsilver.com
 - **Industry:** International Trade & Development / Mining & Metals
 - **Company Size:** 11–50 employees
 - **Headquarters:** Unit 1618B, 16/F Pioneer Centre, 750 Nathan Road, Mong Kok, Kowloon, Hong Kong

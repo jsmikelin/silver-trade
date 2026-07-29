@@ -3,7 +3,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from verify_pr import check_html, check_sitemap_local_urls
+from verify_pr import check_html, check_sitemap_local_urls, check_sitemap_origin_urls
 
 
 def page(body: str, *, extra_head: str = "") -> str:
@@ -61,16 +61,38 @@ class HtmlRegressionTests(unittest.TestCase):
         issues = self.check(page("<header></header><h1>Test</h1>", extra_head='<link rel="dns-prefetch" href="https://example.com"/>'))
         self.assertEqual([], issues)
 
+    def test_rejects_www_canonical(self):
+        content = page("<header></header><h1>Test</h1>").replace(
+            "https://helinsilver.com/test/",
+            "https://www.helinsilver.com/test/",
+        )
+        self.assertIn(
+            "Canonical must use https://helinsilver.com: https://www.helinsilver.com/test/",
+            self.check(content),
+        )
+
     def test_sitemap_rejects_missing_same_site_target(self):
         with tempfile.TemporaryDirectory() as directory:
             sitemap = Path(directory) / "sitemap.xml"
             sitemap.write_text(
-                '<urlset><url><loc>https://www.helinsilver.com/jp/blog/missing/</loc></url></urlset>',
+                '<urlset><url><loc>https://helinsilver.com/jp/blog/missing/</loc></url></urlset>',
                 encoding="utf-8",
             )
             self.assertEqual(
-                ["https://www.helinsilver.com/jp/blog/missing/"],
+                ["https://helinsilver.com/jp/blog/missing/"],
                 check_sitemap_local_urls(sitemap),
+            )
+
+    def test_sitemap_rejects_www_origin(self):
+        with tempfile.TemporaryDirectory() as directory:
+            sitemap = Path(directory) / "sitemap.xml"
+            sitemap.write_text(
+                '<urlset><url><loc>https://www.helinsilver.com/</loc></url></urlset>',
+                encoding="utf-8",
+            )
+            self.assertEqual(
+                ["https://www.helinsilver.com/"],
+                check_sitemap_origin_urls(sitemap),
             )
 
 

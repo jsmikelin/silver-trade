@@ -16,6 +16,7 @@ import re
 import sys
 import urllib.request
 import urllib.error
+import xml.etree.ElementTree as ET
 from urllib.parse import urlparse
 from pathlib import Path
 from html.parser import HTMLParser
@@ -24,6 +25,7 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
 REPO = Path(__file__).resolve().parent
+SITE_ORIGIN = "https://helinsilver.com"
 
 class SEOValidator(HTMLParser):
     def __init__(self):
@@ -41,6 +43,7 @@ class SEOValidator(HTMLParser):
         self.scripts = []
         self.json_ld = []
         self.canonical = None
+        self.robots = None
         self.og_title = None
         self.og_desc = None
         self.current_tag = None
@@ -82,6 +85,8 @@ class SEOValidator(HTMLParser):
                 self.meta_desc = content
             elif name == "keywords":
                 self.keywords = content
+            elif name == "robots":
+                self.robots = content
             elif prop == "og:title":
                 self.og_title = content
             elif prop == "og:description":
@@ -141,6 +146,10 @@ def check_html(html_path: Path) -> dict:
     # Canonical
     if not v.canonical:
         warnings.append("Missing canonical link")
+    else:
+        canonical = urlparse(v.canonical)
+        if canonical.scheme != "https" or canonical.netloc != "helinsilver.com":
+            issues.append(f"Canonical must use {SITE_ORIGIN}: {v.canonical}")
 
     # Open Graph
     if not v.og_title:
@@ -239,13 +248,33 @@ def check_sensitive_changes(diff_output: str) -> list:
     return alerts
 
 
+def sitemap_urls(sitemap_path: Path) -> list[str]:
+    """Parse sitemap locations with an XML parser."""
+    root = ET.parse(sitemap_path).getroot()
+    return [
+        element.text.strip()
+        for element in root.findall(".//{*}loc")
+        if element.text and element.text.strip()
+    ]
+
+
+def check_sitemap_origin_urls(sitemap_path: Path) -> list[str]:
+    """Return sitemap URLs that do not use the canonical HTTPS origin."""
+    invalid = []
+    for url in sitemap_urls(sitemap_path):
+        parsed = urlparse(url)
+        if parsed.scheme != "https" or parsed.netloc != "helinsilver.com":
+            invalid.append(url)
+    return invalid
+
+
 def check_sitemap_local_urls(sitemap_path: Path) -> list[str]:
     """Return same-site sitemap URLs whose static target does not exist."""
-    content = sitemap_path.read_text(encoding="utf-8", errors="replace")
-    urls = set(re.findall(r'https://(?:www\.)?helinsilver\.com[^"<\s]*', content))
     missing = []
 
-    for url in sorted(urls):
+    for url in sorted(set(sitemap_urls(sitemap_path))):
+        if urlparse(url).netloc not in {"helinsilver.com", "www.helinsilver.com"}:
+            continue
         path = urlparse(url).path.lstrip("/")
         if not path:
             target = REPO / "index.html"
@@ -258,6 +287,37 @@ def check_sitemap_local_urls(sitemap_path: Path) -> list[str]:
             missing.append(url)
 
     return missing
+
+
+def check_static_canonical_urls() -> list[str]:
+    """Return published static pages whose canonical is not self-referencing."""
+    html_paths = [REPO / "index.html", REPO / "404.html"]
+    for directory in ("about", "blog", "contact", "products", "jp"):
+        html_paths.extend((REPO / directory).rglob("*.html"))
+
+    issues = []
+    for html_path in html_paths:
+        if not html_path.exists():
+            continue
+        validator = SEOValidator()
+        validator.feed(html_path.read_text(encoding="utf-8", errors="replace"))
+        if not validator.canonical or "noindex" in (validator.robots or "").lower():
+            continue
+
+        relative = html_path.relative_to(REPO).as_posix()
+        if relative == "index.html":
+            web_path = "/"
+        elif relative.endswith("/index.html"):
+            web_path = f"/{relative[:-10]}"
+        else:
+            web_path = f"/{relative}"
+        expected = f"{SITE_ORIGIN}{web_path}"
+        if validator.canonical != expected:
+            issues.append(
+                f"{relative}: canonical {validator.canonical} does not match {expected}"
+            )
+
+    return issues
 
 
 def main():
@@ -347,6 +407,29 @@ def main():
             print(f"  ❌ Sitemap URL has no local page: {url}")
     else:
         print("  ✅ All same-site sitemap URLs have local targets")
+
+    invalid_sitemap_origins = check_sitemap_origin_urls(REPO / "sitemap.xml")
+    if invalid_sitemap_origins:
+        all_ok = False
+        for url in invalid_sitemap_origins:
+            print(f"  ❌ Sitemap URL must use {SITE_ORIGIN}: {url}")
+    else:
+        print(f"  ✅ All sitemap URLs use {SITE_ORIGIN}")
+
+    try:
+        ET.parse(REPO / "feed.xml")
+        print("  ✅ RSS feed is valid XML")
+    except ET.ParseError as exc:
+        all_ok = False
+        print(f"  ❌ RSS feed is invalid XML: {exc}")
+
+    canonical_issues = check_static_canonical_urls()
+    if canonical_issues:
+        all_ok = False
+        for issue in canonical_issues:
+            print(f"  ❌ {issue}")
+    else:
+        print("  ✅ All published static pages use self-referencing canonicals")
 
     # 2. Diff checks
     if args.diff:
