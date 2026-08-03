@@ -1,7 +1,12 @@
 from django.urls import path
+from django.http import HttpResponse
 from . import views
 
+# IndexNow verification key
+INDEXNOW_KEY = "1434e829b6ee787beb4e72d006dd83e3"
+
 urlpatterns = [
+    path(f"{INDEXNOW_KEY}.txt", lambda request: HttpResponse(INDEXNOW_KEY, content_type="text/plain"), name="indexnow_key"),
     path("", views.home, name="home"),
     path("products/", views.products, name="products"),
     path("products/<int:pk>/", views.product_detail, name="product_detail"),
