@@ -18,3 +18,10 @@ Sitemap: https://helinsilver.com/sitemap.xml
 
 # RSS Feed
 RSS: https://helinsilver.com/feed.xml
+
+# 屏蔽非线上死代码 (Django 源模板, 误部署)
+Disallow: /trading/
+Disallow: /googleABCDEF123.html
+Disallow: /seo-meta-report.html
+Disallow: /review_prs.sh
+

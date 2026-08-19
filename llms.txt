@@ -1,13 +1,52 @@
-# Helin Silver (和林银业)
+# Helin Silver (香港长江国际 / 和林银业)
 > B2B Silver Trading — LBMA Compliant · Hong Kong Based · Worldwide Delivery
+
+## Company
+- **Legal Name**: Hong Kong Changjiang International Limited (香港长江国际有限公司)
+- **Products**: Silver Bars 99.99% (LBMA Good Delivery 15kg/~482oz, 1kg/100oz/10oz investment bars) · Silver Grains 99.99% 1-3mm (MOQ 100kg) · Silver Powder 99.9% 200 mesh (MOQ 50kg)
+- **Certifications**: LBMA Compliant · SGS & CCIC Third-Party Tested
+- **Target Markets**: USA (NY, LA, Houston) / Japan (Tokyo, Yokohama, Osaka) / Europe / Middle East
+- **Contact**: mikelin@helinsilver.com · WhatsApp +447599094629 · Telegram @mikelinsuperbot
+- **Offices**: Unit 1618B, 16/F Pioneer Centre, 750 Nathan Road, Mong Kok, Kowloon, Hong Kong · Room 1309, Hongyu Building, Shuibei, Luohu District, Shenzhen
+- **Business Hours**: Mon-Fri 9:00-18:00 HKT
 
 ## Core Pages
 - [Home](https://helinsilver.com/): Premium B2B silver trading platform. LBMA-compliant 99.99% silver bars for wholesale buyers. Hong Kong and Shenzhen offices.
-- [Products](https://helinsilver.com/products/): Silver bars (15kg Standard Good Delivery Bar). Full spec tables with pricing tiers, minimum order quantities.
+- [Products](https://helinsilver.com/products/): Silver bars (15kg Standard Good Delivery Bar, 1kg/100oz/10oz), grains, powder. Full spec tables with pricing tiers, minimum order quantities.
 - [About Us](https://helinsilver.com/about/): 15+ years in precious metals, 500+ tons traded, 8+ countries served. LBMA standards, CCIC certified.
 - [Contact](https://helinsilver.com/contact/): Hong Kong and Shenzhen offices. WhatsApp, email, phone. Japanese and English speaking account managers.
 
-## Blog
+## Blog (English)
 - [Hong Kong Silver Export Guide](https://helinsilver.com/blog/hong-kong-silver-export-guide.html): Complete guide to exporting silver from Hong Kong — regulations, logistics, documentation, and best practices for international buyers.
 - [US Silver Import Guide](https://helinsilver.com/blog/us-silver-import-guide.html): US silver import regulations, duty rates, customs clearance process for Hong Kong-origin silver shipments.
 - [Silver Price Outlook 2026](https://helinsilver.com/blog/silver-price-outlook-2026.html): 2026 silver price forecast and market analysis — supply/demand dynamics, industrial demand, investment trends.
+- [Silver Market Q3 2026](https://helinsilver.com/blog/silver-market-q3-2026/): Q3 2026 market update — industrial demand, supply constraints, price drivers.
+- [Japan Silver Market Opportunities](https://helinsilver.com/blog/japan-silver-market-opportunities/): Japan's silver import market — demand drivers, regulatory landscape, entry strategy for exporters.
+- [LBMA Standards Guide](https://helinsilver.com/blog/lbma-standards-guide/): LBMA Good Delivery standards explained — bar specifications, assay requirements, compliance process.
+- [Silver Shipping: Air vs Sea](https://helinsilver.com/blog/silver-shipping-air-vs-sea/): Freight comparison for precious metals — cost, transit time, insurance, security considerations.
+- [LME Silver Pricing](https://helinsilver.com/blog/lme-silver-pricing/): How LME and LBMA silver pricing works — benchmarks, fixing process, hedging implications.
+- [Origins of Silver: Ancient Mines to Modern Markets](https://helinsilver.com/blog/the-origins-of-silver-from-ancient-mines-to-modern-markets/): Historical overview of silver mining and trade from antiquity to today.
+- [How to Verify LBMA Compliance](https://helinsilver.com/blog/how-to-verify-lbma-compliance-when-sourcing-silver-bars-from-hong-kong/): Due diligence checklist for buyers verifying LBMA-compliant silver bars from Hong Kong suppliers.
+
+## Blog (日本語)
+- [銀価格見通し2026](https://helinsilver.com/jp/blog/silver-price-outlook-2026.html): 2026年の銀価格予測と市場分析
+- [香港からの銀輸出ガイド](https://helinsilver.com/jp/blog/hong-kong-silver-export-guide.html): 香港からの銀輸出完全ガイド
+- [米国銀輸入ガイド](https://helinsilver.com/jp/blog/us-silver-import-guide.html): 米国への銀輸入規制と通関手続き
+- [銀市場2026年第3四半期](https://helinsilver.com/jp/blog/silver-market-q3-2026/): 2026年Q3銀市場アップデート
+- [日本銀市場の機会](https://helinsilver.com/jp/blog/japan-silver-market-opportunities/): 日本市場の需要と参入戦略
+- [LBMA規格ガイド](https://helinsilver.com/jp/blog/lbma-standards-guide/): LBMAグッドデリバリー規格の解説
+- [銀輸送：航空vs海上](https://helinsilver.com/jp/blog/silver-shipping-air-vs-sea/): 貴金属輸送の比較ガイド
+- [LME銀価格メカニズム](https://helinsilver.com/jp/blog/lme-silver-pricing/): LMEとLBMAの銀価格の仕組み
+
+## Japanese Core Pages
+- [日本語ホーム](https://helinsilver.com/jp/): プレミアムB2B銀取引プラットフォーム
+- [製品](https://helinsilver.com/jp/products/): 銀地金・粒・粉末のスペックとMOQ
+- [会社概要](https://helinsilver.com/jp/about/): 香港長江国際有限公司の紹介
+- [お問い合わせ](https://helinsilver.com/jp/contact/): 営業時間・連絡先
+
+## FAQ
+- **What is your minimum order?** Bars: 12 bars (~180kg). Grains: 100kg. Powder: 50kg.
+- **Are your products LBMA certified?** Yes, LBMA Good Delivery compliant, SGS & CCIC third-party tested.
+- **Do you ship worldwide?** Yes — USA, Japan, Europe, Middle East. Air and sea freight available.
+- **What payment terms do you offer?** TT (Telegraphic Transfer) preferred; LC available for qualifying orders.
+- **How fast do you respond?** All inquiries answered within one business day.
