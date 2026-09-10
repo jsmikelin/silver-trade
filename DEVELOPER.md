@@ -94,7 +94,7 @@ Before submitting a PR, verify ALL of the following:
 - [ ] Homepage loads correctly at http://localhost:8000
 - [ ] All navigation links work (Home, Products, About, Insights, Contact)
 - [ ] WhatsApp button opens wa.me/447599094629
-- [ ] Telegram button opens t.me/mikelinsuperbot
+- [x] Telegram removed from site (2026-09-10)
 - [ ] Contact form submits without errors
 - [ ] Japanese version (/jp/) loads correctly
 - [ ] Mobile responsive: check at 375px, 768px widths
@@ -170,5 +170,5 @@ Since development is done with AI coding tools, extra caution required:
 | Channel | Link | Type |
 |---------|------|------|
 | WhatsApp | wa.me/447599094629 | Direct chat |
-| Telegram | t.me/mikelinsuperbot | Bot (auto-reply) |
+| Telegram | removed 2026-09-10 | - |
 | Email | mikelin88999@gmail.com | Business email |
